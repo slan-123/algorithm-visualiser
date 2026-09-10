@@ -176,4 +176,4 @@ speedSlider.addEventListener("input", () => {
     const delay = 210 - Number(speedSlider.value);
     speedValue.textContent = delay;
 });
-
+generateButton.addEventListener("click", generateArray);
