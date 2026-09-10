@@ -322,3 +322,46 @@ input[type="range"] {
     transform: none;
     box-shadow: none;
 }
+.algorithm-info {
+    max-width: 900px;
+    margin: 0 auto 30px;
+    padding: 25px 30px;
+    background-color: rgba(30, 41, 59, 0.75);
+    border: 1px solid rgba(96, 165, 250, 0.2);
+    border-radius: 16px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.algorithm-info h2 {
+    margin: 0 0 10px;
+    color: #60a5fa;
+    font-size: 24px;
+}
+
+.algorithm-info p {
+    margin: 0 auto 20px;
+    max-width: 700px;
+    color: #cbd5e1;
+    line-height: 1.6;
+}
+
+.algorithm-complexity {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    padding: 10px 16px;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+}
+
+.algorithm-complexity span {
+    color: #94a3b8;
+}
+
+.algorithm-complexity strong {
+    color: #60a5fa;
+}
