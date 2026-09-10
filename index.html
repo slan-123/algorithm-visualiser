@@ -36,9 +36,18 @@
     
     <input type="range" id="speed-slider" min="10" max="200" value="50">
     
-    <p>Comparisons: <span id="comparison-count">0</span></p>
+    <div class="stats-container">
+        <div class="stat-card">
+            <span class="stat-label">Comparisons</span>
+            <span id="comparison-count" class="stat-value">0</span>
+        </div>
     
-    <p>Swaps: <span id="swap-count">0</span></p>
+        <div class="stat-card">
+            <span class="stat-label">Swaps</span>
+            <span id="swap-count" class="stat-value">0</span>
+        </div>
+    
+    </div>
     
     <label for="size-slider">
         Array Size: <span id="size-value">30</span>
