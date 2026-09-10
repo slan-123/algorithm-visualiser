@@ -162,6 +162,53 @@ async function insertionSort() {
 
     console.log(array);
 }
+async function mergeSort(start = 0, end = array.length - 1) {
+    if (start >= end) {
+        return;
+    }
+
+    const middle = Math.floor((start + end) / 2);
+
+    await mergeSort(start, middle);
+    await mergeSort(middle + 1, end);
+
+    await merge(start, middle, end);
+}
+async function merge(start, middle, end) {
+    const left = array.slice(start, middle + 1);
+    const right = array.slice(middle + 1, end + 1);
+
+    let leftIndex = 0;
+    let rightIndex = 0;
+    let arrayIndex = start;
+
+    while (leftIndex < left.length && rightIndex < right.length) {
+
+        comparisonCount.textContent++;
+
+        if (left[leftIndex] <= right[rightIndex]) {
+            array[arrayIndex] = left[leftIndex];
+            leftIndex++;
+        } else {
+            array[arrayIndex] = right[rightIndex];
+            rightIndex++;
+        }
+
+        arrayIndex++;
+    }
+
+    while (leftIndex < left.length) {
+        array[arrayIndex] = left[leftIndex];
+        leftIndex++;
+        arrayIndex++;
+    }
+
+    while (rightIndex < right.length) {
+        array[arrayIndex] = right[rightIndex];
+        rightIndex++;
+        arrayIndex++;
+    }
+}
 sortButton.addEventListener("click", () => {
     if (algorithmSelect.value === "bubble") {
         bubbleSort();
@@ -169,7 +216,10 @@ sortButton.addEventListener("click", () => {
         selectionSort();
     } else if (algorithmSelect.value === "insertion") {
         insertionSort();
+    } else if (algorithmSelect.value === "merge") {
+        mergeSort();
     }
+});
 });
 sizeSlider.addEventListener("input", () => {
     sizeValue.textContent = sizeSlider.value;
