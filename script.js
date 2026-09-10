@@ -220,7 +220,6 @@ sortButton.addEventListener("click", () => {
         mergeSort();
     }
 });
-});
 sizeSlider.addEventListener("input", () => {
     sizeValue.textContent = sizeSlider.value;
 });
