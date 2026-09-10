@@ -1,6 +1,7 @@
 const generateButton = document.getElementById("generate-button");
 const arrayContainer = document.getElementById("array-container");
 const sortButton = document.getElementById("sort-button");
+console.log(sortButton);
 let array = [];
 
 function generateArray() {
