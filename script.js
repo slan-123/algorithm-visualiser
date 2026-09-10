@@ -2,11 +2,15 @@ const generateButton = document.getElementById("generate-button");
 const arrayContainer = document.getElementById("array-container");
 const sortButton = document.getElementById("sort-button");
 const speedSlider = document.getElementById("speed-slider");
+const comparisonCount = document.getElementById("comparison-count");
+const swapCount = document.getElementById("swap-count");
 console.log(sortButton);
 let array = [];
 
 function generateArray() {
     array = [];
+    const comparisonCount = document.getElementById("comparison-count");
+    const swapCount = document.getElementById("swap-count");
 
     for (let i = 0; i < 30; i++) {
         const value = Math.floor(Math.random() * 100) + 1;
