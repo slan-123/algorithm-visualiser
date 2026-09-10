@@ -48,12 +48,12 @@ async function bubbleSort() {
             displayArray(j, j + 1, i);
 
             await new Promise(resolve => setTimeout(resolve, Number(speedSlider.value)));
-
+            comparisonCount.textContent++;
             if (array[j] > array[j + 1]) {
                 const temporary = array[j];
                 array[j] = array[j + 1];
                 array[j + 1] = temporary;
-
+                swapCount.textContent++;
                 displayArray(j, j + 1, i);
 
                 await new Promise(resolve => setTimeout(resolve, Number(speedSlider.value)));
