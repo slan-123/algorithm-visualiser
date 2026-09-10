@@ -17,17 +17,17 @@
     
         <p>Visualise how algorithms work step by step.</p>
     </header>
-
-    <button id="generate-button">Generate Array</button>
-    <select id="algorithm-select">
-    <option value="bubble">Bubble Sort</option>
-    <option value="selection">Selection Sort</option>
-    <option value="insertion">Insertion Sort</option>
-    <option value="merge">Merge Sort</option>
-    <option value="quick">Quick Sort</option>
-    <option value="radix">Radix Sort</option>
-    </select>
-    
+    <section class="controls-card">
+        <button id="generate-button">Generate Array</button>
+        <select id="algorithm-select">
+        <option value="bubble">Bubble Sort</option>
+        <option value="selection">Selection Sort</option>
+        <option value="insertion">Insertion Sort</option>
+        <option value="merge">Merge Sort</option>
+        <option value="quick">Quick Sort</option>
+        <option value="radix">Radix Sort</option>
+        </select>
+    </section>
     <button id="sort-button">Sort</button>
     <label for="speed-slider">Speed: <span id="speed-value">150</span> ms</label>
     <input type="range" id="speed-slider" min="10" max="200" value="50">
