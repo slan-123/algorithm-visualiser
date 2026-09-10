@@ -184,6 +184,12 @@ async function merge(start, middle, end) {
 
     while (leftIndex < left.length && rightIndex < right.length) {
 
+        displayArray(start + leftIndex, middle + 1 + rightIndex);
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 210 - Number(speedSlider.value))
+        );
+
         comparisonCount.textContent++;
 
         if (left[leftIndex] <= right[rightIndex]) {
@@ -195,18 +201,36 @@ async function merge(start, middle, end) {
         }
 
         arrayIndex++;
+
+        displayArray(start, end);
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 210 - Number(speedSlider.value))
+        );
     }
 
     while (leftIndex < left.length) {
         array[arrayIndex] = left[leftIndex];
         leftIndex++;
         arrayIndex++;
+
+        displayArray(start, end);
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 210 - Number(speedSlider.value))
+        );
     }
 
     while (rightIndex < right.length) {
         array[arrayIndex] = right[rightIndex];
         rightIndex++;
         arrayIndex++;
+
+        displayArray(start, end);
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 210 - Number(speedSlider.value))
+        );
     }
 }
 sortButton.addEventListener("click", () => {
