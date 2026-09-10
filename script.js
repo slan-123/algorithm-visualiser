@@ -16,11 +16,21 @@ function generateArray() {
     const comparisonCount = document.getElementById("comparison-count");
     const swapCount = document.getElementById("swap-count");
 
-    for (let i = 0; i < Number(sizeSlider.value); i++) {
-        const value = Math.floor(Math.random() * 100) + 1;
+    const numbers = [];
 
-        array.push(value);
+    for (let i = 1; i <= Number(sizeSlider.value); i++) {
+        numbers.push(i);
     }
+    
+    for (let i = numbers.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+    
+        const temporary = numbers[i];
+        numbers[i] = numbers[randomIndex];
+        numbers[randomIndex] = temporary;
+    }
+    
+    array = numbers;
 
     displayArray();
 
