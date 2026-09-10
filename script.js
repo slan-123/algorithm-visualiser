@@ -311,7 +311,6 @@ sortButton.addEventListener("click", () => {
         quickSort();
     }
 });
-});
 sizeSlider.addEventListener("input", () => {
     sizeValue.textContent = sizeSlider.value;
 });
