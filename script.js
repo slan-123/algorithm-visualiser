@@ -1,6 +1,7 @@
 const generateButton = document.getElementById("generate-button");
 const arrayContainer = document.getElementById("array-container");
 const sortButton = document.getElementById("sort-button");
+const speedSlider = document.getElementById("speed-slider");
 console.log(sortButton);
 let array = [];
 
@@ -42,7 +43,7 @@ async function bubbleSort() {
 
             displayArray(j, j + 1, i);
 
-            await new Promise(resolve => setTimeout(resolve, 50));
+            await new Promise(resolve => setTimeout(resolve, Number(speedSlider.value)));
 
             if (array[j] > array[j + 1]) {
                 const temporary = array[j];
@@ -51,7 +52,7 @@ async function bubbleSort() {
 
                 displayArray(j, j + 1, i);
 
-                await new Promise(resolve => setTimeout(resolve, 50));
+                await new Promise(resolve => setTimeout(resolve, Number(speedSlider.value)));
             }
         }
     }
