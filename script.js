@@ -43,21 +43,33 @@ function displayArray(comparing1 = -1, comparing2 = -1, sortedCount = 0) {
 async function bubbleSort() {
     for (let i = 0; i < array.length; i++) {
 
+        let swapped = false;
+
         for (let j = 0; j < array.length - 1 - i; j++) {
 
             displayArray(j, j + 1, i);
 
             await new Promise(resolve => setTimeout(resolve, Number(speedSlider.value)));
+
             comparisonCount.textContent++;
+
             if (array[j] > array[j + 1]) {
                 const temporary = array[j];
                 array[j] = array[j + 1];
                 array[j + 1] = temporary;
+
                 swapCount.textContent++;
+
+                swapped = true;
+
                 displayArray(j, j + 1, i);
 
                 await new Promise(resolve => setTimeout(resolve, Number(speedSlider.value)));
             }
+        }
+
+        if (!swapped) {
+            break;
         }
     }
 
