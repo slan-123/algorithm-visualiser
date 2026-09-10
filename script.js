@@ -18,7 +18,7 @@ function generateArray() {
     console.log(array);
 }
 
-function displayArray(comparing1 = -1, comparing2 = -1) {
+function displayArray(comparing1 = -1, comparing2 = -1, sortedCount = 0) {
     arrayContainer.innerHTML = "";
 
     for (let i = 0; i < array.length; i++) {
@@ -26,8 +26,10 @@ function displayArray(comparing1 = -1, comparing2 = -1) {
 
         bar.style.height = array[i] * 3 + "px";
 
-        if (i === comparing1 || i === comparing2) {
-            bar.style.backgroundColor = "red";
+        if (i >= array.length - sortedCount) {
+            bar.classList.add("sorted");
+        } else if (i === comparing1 || i === comparing2) {
+            bar.classList.add("comparing");
         }
 
         arrayContainer.appendChild(bar);
