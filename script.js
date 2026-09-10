@@ -237,6 +237,67 @@ async function merge(start, middle, end) {
         );
     }
 }
+async function quickSort(start = 0, end = array.length - 1) {
+    if (start >= end) {
+        return;
+    }
+
+    const pivotIndex = await partition(start, end);
+
+    await quickSort(start, pivotIndex - 1);
+    await quickSort(pivotIndex + 1, end);
+
+    if (start === 0 && end === array.length - 1) {
+        displayArray(-1, -1, array.length);
+    }
+}
+async function partition(start, end) {
+    const pivot = array[end];
+
+    let smallerIndex = start;
+
+    for (let i = start; i < end; i++) {
+
+        displayArray(i, end);
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 210 - Number(speedSlider.value))
+        );
+
+        comparisonCount.textContent++;
+
+        if (array[i] < pivot) {
+
+            const temporary = array[smallerIndex];
+            array[smallerIndex] = array[i];
+            array[i] = temporary;
+
+            swapCount.textContent++;
+
+            displayArray(smallerIndex, i);
+
+            await new Promise(resolve =>
+                setTimeout(resolve, 210 - Number(speedSlider.value))
+            );
+
+            smallerIndex++;
+        }
+    }
+
+    const temporary = array[smallerIndex];
+    array[smallerIndex] = array[end];
+    array[end] = temporary;
+
+    swapCount.textContent++;
+
+    displayArray(smallerIndex, end);
+
+    await new Promise(resolve =>
+        setTimeout(resolve, 210 - Number(speedSlider.value))
+    );
+
+    return smallerIndex;
+}
 sortButton.addEventListener("click", () => {
     if (algorithmSelect.value === "bubble") {
         bubbleSort();
@@ -246,7 +307,10 @@ sortButton.addEventListener("click", () => {
         insertionSort();
     } else if (algorithmSelect.value === "merge") {
         mergeSort();
+    } else if (algorithmSelect.value === "quick") {
+        quickSort();
     }
+});
 });
 sizeSlider.addEventListener("input", () => {
     sizeValue.textContent = sizeSlider.value;
