@@ -298,6 +298,61 @@ async function partition(start, end) {
 
     return smallerIndex;
 }
+function getDigit(number, place) {
+    return Math.floor(number / Math.pow(10, place)) % 10;
+}
+function createBuckets() {
+    const buckets = [];
+
+    for (let i = 0; i < 10; i++) {
+        buckets.push([]);
+    }
+
+    return buckets;
+}
+function distributeIntoBuckets(numbers, place) {
+    const buckets = createBuckets();
+
+    for (let i = 0; i < numbers.length; i++) {
+        const digit = getDigit(numbers[i], place);
+
+        buckets[digit].push(numbers[i]);
+    }
+
+    return buckets;
+}
+function collectBuckets(buckets) {
+    const result = [];
+
+    for (let i = 0; i < buckets.length; i++) {
+        for (let j = 0; j < buckets[i].length; j++) {
+            result.push(buckets[i][j]);
+        }
+    }
+
+    return result;
+}
+async function radixSort() {
+    const maxValue = Math.max(...array);
+    const maxDigits = String(maxValue).length;
+
+    for (let place = 0; place < maxDigits; place++) {
+
+        const buckets = distributeIntoBuckets(array, place);
+
+        array = collectBuckets(buckets);
+
+        displayArray();
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 210 - Number(speedSlider.value))
+        );
+    }
+
+    displayArray(-1, -1, array.length);
+
+    console.log(array);
+}
 sortButton.addEventListener("click", () => {
     if (algorithmSelect.value === "bubble") {
         bubbleSort();
@@ -309,6 +364,8 @@ sortButton.addEventListener("click", () => {
         mergeSort();
     } else if (algorithmSelect.value === "quick") {
         quickSort();
+    } else if (algorithmSelect.value === "radix") {
+        radixSort();
     }
 });
 sizeSlider.addEventListener("input", () => {
