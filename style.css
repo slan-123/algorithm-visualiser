@@ -1,7 +1,10 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background-color: #0f172a;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.12), transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(96, 165, 250, 0.08), transparent 35%),
+        #0f172a;
     color: #f8fafc;
     text-align: center;
 }
