@@ -13,8 +13,8 @@ let array = [];
 
 function generateArray() {
     array = [];
-    const comparisonCount = document.getElementById("comparison-count");
-    const swapCount = document.getElementById("swap-count");
+    comparisonCount.textContent = 0;
+    swapCount.textContent = 0;
 
     const numbers = [];
 
