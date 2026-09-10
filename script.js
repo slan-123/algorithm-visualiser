@@ -5,6 +5,7 @@ const speedSlider = document.getElementById("speed-slider");
 const comparisonCount = document.getElementById("comparison-count");
 const swapCount = document.getElementById("swap-count");
 const sizeSlider = document.getElementById("size-slider");
+const sizeValue = document.getElementById("size-value");
 console.log(sortButton);
 let array = [];
 
@@ -80,3 +81,7 @@ async function bubbleSort() {
 }
 generateButton.addEventListener("click", generateArray);
 sortButton.addEventListener("click", bubbleSort);
+
+sizeSlider.addEventListener("input", () => {
+    sizeValue.textContent = sizeSlider.value;
+});
