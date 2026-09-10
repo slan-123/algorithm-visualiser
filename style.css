@@ -365,3 +365,29 @@ input[type="range"] {
 .algorithm-complexity strong {
     color: #60a5fa;
 }
+.complexity-container {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.complexity-card {
+    min-width: 120px;
+    padding: 12px 18px;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+}
+
+.complexity-card span {
+    display: block;
+    margin-bottom: 5px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.complexity-card strong {
+    color: #60a5fa;
+    font-size: 18px;
+}
