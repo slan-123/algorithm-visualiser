@@ -26,15 +26,15 @@
         <option value="merge">Merge Sort</option>
         <option value="quick">Quick Sort</option>
         <option value="radix">Radix Sort</option>
+        <button id="sort-button">Sort</button>
+        <label for="speed-slider">Speed: <span id="speed-value">150</span> ms</label>
+        <input type="range" id="speed-slider" min="10" max="200" value="50">
+        <p>Comparisons: <span id="comparison-count">0</span></p>
+        <p>Swaps: <span id="swap-count">0</span></p>
+        <label for="size-slider">Array Size: <span id="size-value">30</span></label>
+        <input type="range" id="size-slider" min="10" max="99" value="30">
         </select>
     </section>
-    <button id="sort-button">Sort</button>
-    <label for="speed-slider">Speed: <span id="speed-value">150</span> ms</label>
-    <input type="range" id="speed-slider" min="10" max="200" value="50">
-    <p>Comparisons: <span id="comparison-count">0</span></p>
-    <p>Swaps: <span id="swap-count">0</span></p>
-    <label for="size-slider">Array Size: <span id="size-value">30</span></label>
-    <input type="range" id="size-slider" min="10" max="99" value="30">
     
     <div id="array-container"></div>
     <div id="bucket-container"></div>
