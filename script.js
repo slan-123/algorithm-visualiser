@@ -37,9 +37,10 @@ function displayArray(comparing1 = -1, comparing2 = -1, sortedCount = 0) {
 }
 async function bubbleSort() {
     for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array.length - 1; j++) {
 
-            displayArray(j, j + 1);
+        for (let j = 0; j < array.length - 1 - i; j++) {
+
+            displayArray(j, j + 1, i);
 
             await new Promise(resolve => setTimeout(resolve, 50));
 
@@ -48,15 +49,15 @@ async function bubbleSort() {
                 array[j] = array[j + 1];
                 array[j + 1] = temporary;
 
-                displayArray();
+                displayArray(j, j + 1, i);
 
                 await new Promise(resolve => setTimeout(resolve, 50));
             }
-
         }
     }
 
-    displayArray();
+    displayArray(-1, -1, array.length);
+
     console.log(array);
 }
 generateButton.addEventListener("click", generateArray);
