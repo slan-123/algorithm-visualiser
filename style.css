@@ -98,6 +98,10 @@ body {
     margin: 0;
 }
 .controls-card {
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background-color: rgba(30, 41, 59, 0.75);
+    border: 1px solid rgba(96, 165, 250, 0.2);
     max-width: 900px;
     margin: 0 auto 30px;
     padding: 30px;
