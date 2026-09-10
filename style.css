@@ -124,3 +124,9 @@ body {
 #sort-button:active {
     transform: translateY(0);
 }
+.controls-card {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    align-items: center;
+}
