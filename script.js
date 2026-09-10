@@ -18,13 +18,17 @@ function generateArray() {
     console.log(array);
 }
 
-function displayArray() {
+function displayArray(comparing1 = -1, comparing2 = -1) {
     arrayContainer.innerHTML = "";
 
     for (let i = 0; i < array.length; i++) {
         const bar = document.createElement("div");
 
         bar.style.height = array[i] * 3 + "px";
+
+        if (i === comparing1 || i === comparing2) {
+            bar.style.backgroundColor = "red";
+        }
 
         arrayContainer.appendChild(bar);
     }
@@ -40,7 +44,7 @@ async function bubbleSort() {
 
                 displayArray();
 
-                await new Promise(resolve => setTimeout(resolve, 100));
+                await new Promise(resolve => setTimeout(resolve, 50));
             }
 
         }
