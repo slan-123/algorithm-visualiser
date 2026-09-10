@@ -140,3 +140,32 @@ input[type="range"] {
     font-weight: 600;
     color: #cbd5e1;
 }
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.stat-card {
+    min-width: 150px;
+    padding: 18px 25px;
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+
+.stat-label {
+    display: block;
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 6px;
+}
+
+.stat-value {
+    display: block;
+    font-size: 28px;
+    font-weight: bold;
+    color: #60a5fa;
+}
