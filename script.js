@@ -10,6 +10,8 @@ function generateArray() {
         const bar = document.createElement("div");
 
         bar.style.height = value * 3 + "px";
+        bar.style.width = "10px";
+        bar.style.backgroundColor = "blue";
 
         arrayContainer.appendChild(bar);
     }
