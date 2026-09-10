@@ -244,3 +244,23 @@ input[type="range"] {
         transform: scale(1);
     }
 }
+#generate-button,
+#sort-button {
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#generate-button:hover,
+#sort-button:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.3);
+}
+
+#generate-button:active,
+#sort-button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
