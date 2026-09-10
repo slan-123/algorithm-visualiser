@@ -1,16 +1,24 @@
 const generateButton = document.getElementById("generate-button");
 const arrayContainer = document.getElementById("array-container");
 
-function generateArray() {
-    arrayContainer.innerHTML = "";
+let array = [];
 
-    const array = [];
+function generateArray() {
+    array = [];
 
     for (let i = 0; i < 30; i++) {
         const value = Math.floor(Math.random() * 100) + 1;
 
         array.push(value);
     }
+
+    displayArray();
+
+    console.log(array);
+}
+
+function displayArray() {
+    arrayContainer.innerHTML = "";
 
     for (let i = 0; i < array.length; i++) {
         const bar = document.createElement("div");
@@ -19,8 +27,6 @@ function generateArray() {
 
         arrayContainer.appendChild(bar);
     }
-
-    console.log(array);
 }
 
 generateButton.addEventListener("click", generateArray);
