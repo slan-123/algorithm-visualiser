@@ -85,8 +85,49 @@ async function bubbleSort() {
 
     console.log(array);
 }
+async function selectionSort() {
+    for (let i = 0; i < array.length - 1; i++) {
+
+        let minimumIndex = i;
+
+        for (let j = i + 1; j < array.length; j++) {
+
+            displayArray(j, minimumIndex, i);
+
+            await new Promise(resolve => setTimeout(resolve, 210 - Number(speedSlider.value)));
+
+            comparisonCount.textContent++;
+
+            if (array[j] < array[minimumIndex]) {
+                minimumIndex = j;
+            }
+        }
+
+        if (minimumIndex !== i) {
+            const temporary = array[i];
+            array[i] = array[minimumIndex];
+            array[minimumIndex] = temporary;
+
+            swapCount.textContent++;
+
+            displayArray(i, minimumIndex, i);
+
+            await new Promise(resolve => setTimeout(resolve, 210 - Number(speedSlider.value)));
+        }
+    }
+
+    displayArray(-1, -1, array.length);
+
+    console.log(array);
+}
 generateButton.addEventListener("click", generateArray);
-sortButton.addEventListener("click", bubbleSort);
+sortButton.addEventListener("click", () => {
+    if (algorithmSelect.value === "bubble") {
+        bubbleSort();
+    } else if (algorithmSelect.value === "selection") {
+        selectionSort();
+    }
+});
 
 speedSlider.addEventListener("input", () => {
     const delay = 210 - Number(speedSlider.value);
