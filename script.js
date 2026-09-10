@@ -7,6 +7,7 @@ const swapCount = document.getElementById("swap-count");
 const sizeSlider = document.getElementById("size-slider");
 const sizeValue = document.getElementById("size-value");
 const speedValue = document.getElementById("speed-value");
+const algorithmSelect = document.getElementById("algorithm-select");
 console.log(sortButton);
 let array = [];
 
