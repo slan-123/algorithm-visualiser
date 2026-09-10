@@ -37,6 +37,10 @@ async function bubbleSort() {
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array.length - 1; j++) {
 
+            displayArray(j, j + 1);
+
+            await new Promise(resolve => setTimeout(resolve, 50));
+
             if (array[j] > array[j + 1]) {
                 const temporary = array[j];
                 array[j] = array[j + 1];
@@ -50,6 +54,7 @@ async function bubbleSort() {
         }
     }
 
+    displayArray();
     console.log(array);
 }
 generateButton.addEventListener("click", generateArray);
