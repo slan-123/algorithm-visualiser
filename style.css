@@ -16,3 +16,6 @@
 #array-container div.comparing {
     background-color: red;
 }
+#array-container div.sorted {
+    background-color: green;
+}
