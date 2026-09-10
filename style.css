@@ -130,3 +130,13 @@ body {
     gap: 18px;
     align-items: center;
 }
+input[type="range"] {
+    width: 300px;
+    accent-color: #60a5fa;
+    cursor: pointer;
+}
+.controls-card label {
+    font-size: 15px;
+    font-weight: 600;
+    color: #cbd5e1;
+}
