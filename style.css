@@ -13,3 +13,6 @@
     width: 15px;
     background-color: blue;
 }
+#array-container div.comparing {
+    background-color: red;
+}
