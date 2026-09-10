@@ -6,6 +6,7 @@ const comparisonCount = document.getElementById("comparison-count");
 const swapCount = document.getElementById("swap-count");
 const sizeSlider = document.getElementById("size-slider");
 const sizeValue = document.getElementById("size-value");
+const speedValue = document.getElementById("speed-value");
 console.log(sortButton);
 let array = [];
 
@@ -51,7 +52,9 @@ async function bubbleSort() {
 
             displayArray(j, j + 1, i);
 
-            await new Promise(resolve => setTimeout(resolve, Number(speedSlider.value)));
+            const delay = 210 - Number(speedSlider.value);
+
+            await new Promise(resolve => setTimeout(resolve, delay));
 
             comparisonCount.textContent++;
 
@@ -66,7 +69,9 @@ async function bubbleSort() {
 
                 displayArray(j, j + 1, i);
 
-                await new Promise(resolve => setTimeout(resolve, Number(speedSlider.value)));
+                const delay = 210 - Number(speedSlider.value);
+
+                await new Promise(resolve => setTimeout(resolve, delay));
             }
         }
 
@@ -82,6 +87,8 @@ async function bubbleSort() {
 generateButton.addEventListener("click", generateArray);
 sortButton.addEventListener("click", bubbleSort);
 
-sizeSlider.addEventListener("input", () => {
-    sizeValue.textContent = sizeSlider.value;
+speedSlider.addEventListener("input", () => {
+    const delay = 210 - Number(speedSlider.value);
+    speedValue.textContent = delay;
 });
+
