@@ -173,6 +173,10 @@ async function mergeSort(start = 0, end = array.length - 1) {
     await mergeSort(middle + 1, end);
 
     await merge(start, middle, end);
+
+    if (start === 0 && end === array.length - 1) {
+        displayArray(-1, -1, array.length);
+    }
 }
 async function merge(start, middle, end) {
     const left = array.slice(start, middle + 1);
