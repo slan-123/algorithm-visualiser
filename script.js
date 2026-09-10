@@ -171,6 +171,9 @@ sortButton.addEventListener("click", () => {
         insertionSort();
     }
 });
+sizeSlider.addEventListener("input", () => {
+    sizeValue.textContent = sizeSlider.value;
+});
 
 speedSlider.addEventListener("input", () => {
     const delay = 210 - Number(speedSlider.value);
