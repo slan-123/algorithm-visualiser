@@ -45,4 +45,4 @@ function bubbleSort() {
     console.log(array);
 }
 generateButton.addEventListener("click", generateArray);
-generateButton.addEventListener("click", generateArray);
+sortButton.addEventListener("click", bubbleSort);
