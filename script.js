@@ -8,6 +8,7 @@ const sizeSlider = document.getElementById("size-slider");
 const sizeValue = document.getElementById("size-value");
 const speedValue = document.getElementById("speed-value");
 const algorithmSelect = document.getElementById("algorithm-select");
+const statusMessage = document.getElementById("status-message");
 console.log(sortButton);
 let array = [];
 
@@ -15,6 +16,7 @@ function generateArray() {
     array = [];
     comparisonCount.textContent = 0;
     swapCount.textContent = 0;
+    statusMessage.classList.remove("show");
 
     const numbers = [];
 
@@ -399,6 +401,10 @@ async function radixSort() {
 
     console.log(array);
 }
+function showSortedMessage() {
+    statusMessage.textContent = "✓ Sorted!";
+    statusMessage.classList.add("show");
+}
 function setSortingState(isSorting) {
     sortButton.disabled = isSorting;
 }
@@ -424,6 +430,7 @@ sortButton.addEventListener("click", async () => {
     }
 
     sortButton.disabled = false;
+    showSortedMessage();
 });
 sizeSlider.addEventListener("input", () => {
     sizeValue.textContent = sizeSlider.value;
