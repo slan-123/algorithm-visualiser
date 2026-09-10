@@ -399,20 +399,31 @@ async function radixSort() {
 
     console.log(array);
 }
-sortButton.addEventListener("click", () => {
-    if (algorithmSelect.value === "bubble") {
-        bubbleSort();
-    } else if (algorithmSelect.value === "selection") {
-        selectionSort();
-    } else if (algorithmSelect.value === "insertion") {
-        insertionSort();
-    } else if (algorithmSelect.value === "merge") {
-        mergeSort();
-    } else if (algorithmSelect.value === "quick") {
-        quickSort();
-    } else if (algorithmSelect.value === "radix") {
-        radixSort();
+function setSortingState(isSorting) {
+    sortButton.disabled = isSorting;
+}
+sortButton.addEventListener("click", async () => {
+    if (sortButton.disabled) {
+        return;
     }
+
+    sortButton.disabled = true;
+
+    if (algorithmSelect.value === "bubble") {
+        await bubbleSort();
+    } else if (algorithmSelect.value === "selection") {
+        await selectionSort();
+    } else if (algorithmSelect.value === "insertion") {
+        await insertionSort();
+    } else if (algorithmSelect.value === "merge") {
+        await mergeSort();
+    } else if (algorithmSelect.value === "quick") {
+        await quickSort();
+    } else if (algorithmSelect.value === "radix") {
+        await radixSort();
+    }
+
+    sortButton.disabled = false;
 });
 sizeSlider.addEventListener("input", () => {
     sizeValue.textContent = sizeSlider.value;
