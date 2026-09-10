@@ -437,38 +437,61 @@ generateButton.addEventListener("click", generateArray);
 generateArray();
 const algorithmTitle = document.getElementById("algorithm-title");
 const algorithmDescription = document.getElementById("algorithm-description");
-const algorithmComplexity = document.getElementById("algorithm-complexity");
+const bestComplexity = document.getElementById("best-complexity");
+const averageComplexity = document.getElementById("average-complexity");
+const worstComplexity = document.getElementById("worst-complexity");
 
-algorithmSelect.addEventListener("change", () => {
-    if (algorithmSelect.value === "bubble") {
-        algorithmTitle.textContent = "Bubble Sort";
-        algorithmDescription.textContent =
-            "Bubble Sort repeatedly compares neighbouring values and swaps them when they are in the wrong order.";
-        algorithmComplexity.textContent = "O(n²)";
-    } else if (algorithmSelect.value === "selection") {
-        algorithmTitle.textContent = "Selection Sort";
-        algorithmDescription.textContent =
-            "Selection Sort repeatedly finds the smallest value and moves it into its correct position.";
-        algorithmComplexity.textContent = "O(n²)";
-    } else if (algorithmSelect.value === "insertion") {
-        algorithmTitle.textContent = "Insertion Sort";
-        algorithmDescription.textContent =
-            "Insertion Sort builds the sorted section one value at a time by inserting each value into its correct position.";
-        algorithmComplexity.textContent = "O(n²)";
-    } else if (algorithmSelect.value === "merge") {
-        algorithmTitle.textContent = "Merge Sort";
-        algorithmDescription.textContent =
-            "Merge Sort splits the array into smaller sections, sorts them, and then merges those sections together.";
-        algorithmComplexity.textContent = "O(n log n)";
-    } else if (algorithmSelect.value === "quick") {
-        algorithmTitle.textContent = "Quick Sort";
-        algorithmDescription.textContent =
-            "Quick Sort chooses a pivot and rearranges the array so smaller values go before it and larger values go after it.";
-        algorithmComplexity.textContent = "O(n log n)";
-    } else if (algorithmSelect.value === "radix") {
-        algorithmTitle.textContent = "Radix Sort";
-        algorithmDescription.textContent =
-            "Radix Sort sorts numbers by processing their digits, placing values into buckets based on each digit.";
-        algorithmComplexity.textContent = "O(nk)";
-    }
-});
+if (algorithmSelect.value === "bubble") {
+    algorithmTitle.textContent = "Bubble Sort";
+    algorithmDescription.textContent =
+        "Bubble Sort repeatedly compares neighbouring values and swaps them when they are in the wrong order.";
+
+    bestComplexity.textContent = "O(n)";
+    averageComplexity.textContent = "O(n²)";
+    worstComplexity.textContent = "O(n²)";
+
+} else if (algorithmSelect.value === "selection") {
+    algorithmTitle.textContent = "Selection Sort";
+    algorithmDescription.textContent =
+        "Selection Sort repeatedly finds the smallest value and moves it into its correct position.";
+
+    bestComplexity.textContent = "O(n²)";
+    averageComplexity.textContent = "O(n²)";
+    worstComplexity.textContent = "O(n²)";
+
+} else if (algorithmSelect.value === "insertion") {
+    algorithmTitle.textContent = "Insertion Sort";
+    algorithmDescription.textContent =
+        "Insertion Sort builds the sorted section one value at a time by inserting each value into its correct position.";
+
+    bestComplexity.textContent = "O(n)";
+    averageComplexity.textContent = "O(n²)";
+    worstComplexity.textContent = "O(n²)";
+
+} else if (algorithmSelect.value === "merge") {
+    algorithmTitle.textContent = "Merge Sort";
+    algorithmDescription.textContent =
+        "Merge Sort splits the array into smaller sections, sorts them, and then merges those sections together.";
+
+    bestComplexity.textContent = "O(n log n)";
+    averageComplexity.textContent = "O(n log n)";
+    worstComplexity.textContent = "O(n log n)";
+
+} else if (algorithmSelect.value === "quick") {
+    algorithmTitle.textContent = "Quick Sort";
+    algorithmDescription.textContent =
+        "Quick Sort chooses a pivot and rearranges the array so smaller values go before it and larger values go after it.";
+
+    bestComplexity.textContent = "O(n log n)";
+    averageComplexity.textContent = "O(n log n)";
+    worstComplexity.textContent = "O(n²)";
+
+} else if (algorithmSelect.value === "radix") {
+    algorithmTitle.textContent = "Radix Sort";
+    algorithmDescription.textContent =
+        "Radix Sort sorts numbers by processing their digits and placing values into buckets based on each digit.";
+
+    bestComplexity.textContent = "O(nk)";
+    averageComplexity.textContent = "O(nk)";
+    worstComplexity.textContent = "O(nk)";
+}
