@@ -206,3 +206,34 @@ input[type="range"] {
         transform 0.15s ease,
         box-shadow 0.15s ease;
 }
+.bucket {
+    animation: bucketAppear 0.25s ease;
+}
+
+.bucket-number {
+    animation: numberAppear 0.2s ease;
+}
+
+@keyframes bucketAppear {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes numberAppear {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
