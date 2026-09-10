@@ -1,7 +1,6 @@
 const generateButton = document.getElementById("generate-button");
-const sortButton = document.getElementById("sort-button");
 const arrayContainer = document.getElementById("array-container");
-
+const sortButton = document.getElementById("sort-button");
 let array = [];
 
 function generateArray() {
@@ -29,7 +28,6 @@ function displayArray() {
         arrayContainer.appendChild(bar);
     }
 }
-
 function bubbleSort() {
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array.length - 1; j++) {
@@ -46,7 +44,5 @@ function bubbleSort() {
     displayArray();
     console.log(array);
 }
-
 generateButton.addEventListener("click", generateArray);
-sortButton.addEventListener("click", bubbleSort);
-```
+generateButton.addEventListener("click", generateArray);
