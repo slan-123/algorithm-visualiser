@@ -264,3 +264,55 @@ input[type="range"] {
     transform: translateY(0);
     box-shadow: none;
 }
+@media (max-width: 600px) {
+    .hero {
+        padding: 40px 15px 25px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .controls-card {
+        width: calc(100% - 30px);
+        padding: 20px 15px;
+    }
+
+    input[type="range"] {
+        width: 90%;
+    }
+
+    .stats-container {
+        gap: 10px;
+    }
+
+    .stat-card {
+        min-width: 0;
+        flex: 1;
+        padding: 15px 10px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+    }
+
+    #array-container {
+        width: calc(100% - 30px);
+        margin-left: auto;
+        margin-right: auto;
+        gap: 2px;
+    }
+
+    #array-container div {
+        width: 8px;
+    }
+
+    #bucket-container {
+        width: calc(100% - 30px);
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
