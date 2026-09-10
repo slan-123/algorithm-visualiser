@@ -310,6 +310,19 @@ function createBuckets() {
 
     return buckets;
 }
+function displayBuckets(buckets) {
+    const bucketContainer = document.getElementById("bucket-container");
+
+    bucketContainer.innerHTML = "";
+
+    for (let i = 0; i < buckets.length; i++) {
+        const bucket = document.createElement("div");
+
+        bucket.textContent = i + ": " + buckets[i].join(", ");
+
+        bucketContainer.appendChild(bucket);
+    }
+}
 function distributeIntoBuckets(numbers, place) {
     const buckets = createBuckets();
 
@@ -340,7 +353,13 @@ async function radixSort() {
 
         const buckets = distributeIntoBuckets(array, place);
 
-        array = collectBuckets(buckets);
+        displayBuckets(buckets);
+        
+        await new Promise(resolve =>
+            setTimeout(resolve, 210 - Number(speedSlider.value))
+        );
+        
+        array = collectBuckets(buckets);    
 
         displayArray();
 
