@@ -29,7 +29,7 @@ function displayArray() {
         arrayContainer.appendChild(bar);
     }
 }
-function bubbleSort() {
+async function bubbleSort() {
     for (let i = 0; i < array.length; i++) {
         for (let j = 0; j < array.length - 1; j++) {
 
@@ -37,12 +37,15 @@ function bubbleSort() {
                 const temporary = array[j];
                 array[j] = array[j + 1];
                 array[j + 1] = temporary;
+
+                displayArray();
+
+                await new Promise(resolve => setTimeout(resolve, 100));
             }
 
         }
     }
 
-    displayArray();
     console.log(array);
 }
 generateButton.addEventListener("click", generateArray);
