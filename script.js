@@ -434,3 +434,4 @@ speedSlider.addEventListener("input", () => {
     speedValue.textContent = delay;
 });
 generateButton.addEventListener("click", generateArray);
+generateArray();
