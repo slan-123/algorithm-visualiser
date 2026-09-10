@@ -101,3 +101,26 @@ body {
     border-color: #60a5fa;
     box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.15);
 }
+#generate-button,
+#sort-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: #3b82f6;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+#generate-button:hover,
+#sort-button:hover {
+    background-color: #2563eb;
+    transform: translateY(-2px);
+}
+
+#generate-button:active,
+#sort-button:active {
+    transform: translateY(0);
+}
