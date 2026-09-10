@@ -4,6 +4,7 @@ const sortButton = document.getElementById("sort-button");
 const speedSlider = document.getElementById("speed-slider");
 const comparisonCount = document.getElementById("comparison-count");
 const swapCount = document.getElementById("swap-count");
+const sizeSlider = document.getElementById("size-slider");
 console.log(sortButton);
 let array = [];
 
@@ -12,7 +13,7 @@ function generateArray() {
     const comparisonCount = document.getElementById("comparison-count");
     const swapCount = document.getElementById("swap-count");
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < Number(sizeSlider.value); i++) {
         const value = Math.floor(Math.random() * 100) + 1;
 
         array.push(value);
