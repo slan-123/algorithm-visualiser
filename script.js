@@ -327,8 +327,25 @@ function displayBuckets(buckets) {
 
     for (let i = 0; i < buckets.length; i++) {
         const bucket = document.createElement("div");
+        bucket.classList.add("bucket");
 
-        bucket.textContent = i + ": " + buckets[i].join(", ");
+        const bucketLabel = document.createElement("div");
+        bucketLabel.classList.add("bucket-label");
+        bucketLabel.textContent = i;
+
+        const bucketNumbers = document.createElement("div");
+        bucketNumbers.classList.add("bucket-numbers");
+
+        for (let j = 0; j < buckets[i].length; j++) {
+            const number = document.createElement("div");
+            number.classList.add("bucket-number");
+            number.textContent = buckets[i][j];
+
+            bucketNumbers.appendChild(number);
+        }
+
+        bucket.appendChild(bucketLabel);
+        bucket.appendChild(bucketNumbers);
 
         bucketContainer.appendChild(bucket);
     }
