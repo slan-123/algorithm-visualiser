@@ -17,7 +17,13 @@
     <p>Visualise how algorithms work step by step.</p>
 
     <button id="generate-button">Generate Array</button>
-    <button id="sort-button">Bubble Sort</button>
+    <select id="algorithm-select">
+    <option value="bubble">Bubble Sort</option>
+    <option value="selection">Selection Sort</option>
+    <option value="insertion">Insertion Sort</option>
+    </select>
+    
+    <button id="sort-button">Sort</button>
     <label for="speed-slider">Speed: <span id="speed-value">150</span> ms</label>
     <input type="range" id="speed-slider" min="10" max="200" value="50">
     <p>Comparisons: <span id="comparison-count">0</span></p>
