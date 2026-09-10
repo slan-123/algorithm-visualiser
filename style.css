@@ -316,3 +316,9 @@ input[type="range"] {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+#sort-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
