@@ -120,12 +120,55 @@ async function selectionSort() {
 
     console.log(array);
 }
-generateButton.addEventListener("click", generateArray);
+async function insertionSort() {
+    for (let i = 1; i < array.length; i++) {
+
+        const currentValue = array[i];
+        let j = i - 1;
+
+        while (j >= 0 && array[j] > currentValue) {
+
+            displayArray(j, j + 1, i);
+
+            await new Promise(resolve =>
+                setTimeout(resolve, 210 - Number(speedSlider.value))
+            );
+
+            comparisonCount.textContent++;
+
+            array[j + 1] = array[j];
+
+            j--;
+
+            swapCount.textContent++;
+
+            displayArray(j + 1, j + 2, i);
+
+            await new Promise(resolve =>
+                setTimeout(resolve, 210 - Number(speedSlider.value))
+            );
+        }
+
+        array[j + 1] = currentValue;
+
+        displayArray(-1, -1, i);
+
+        await new Promise(resolve =>
+            setTimeout(resolve, 210 - Number(speedSlider.value))
+        );
+    }
+
+    displayArray(-1, -1, array.length);
+
+    console.log(array);
+}
 sortButton.addEventListener("click", () => {
     if (algorithmSelect.value === "bubble") {
         bubbleSort();
     } else if (algorithmSelect.value === "selection") {
         selectionSort();
+    } else if (algorithmSelect.value === "insertion") {
+        insertionSort();
     }
 });
 
