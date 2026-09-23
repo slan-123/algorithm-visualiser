@@ -4,6 +4,7 @@ const sortButton = document.getElementById("sort-button");
 const speedSlider = document.getElementById("speed-slider");
 const comparisonCount = document.getElementById("comparison-count");
 const swapCount = document.getElementById("swap-count");
+const timeCount = document.getElementById("time-count");
 const sizeSlider = document.getElementById("size-slider");
 const sizeValue = document.getElementById("size-value");
 const speedValue = document.getElementById("speed-value");
@@ -16,6 +17,7 @@ function generateArray() {
     array = [];
     comparisonCount.textContent = 0;
     swapCount.textContent = 0;
+    timeCount.textContent = "0.00s";
     statusMessage.classList.remove("show");
 
     const numbers = [];
@@ -39,7 +41,18 @@ function generateArray() {
     console.log(array);
 }
 
-function displayArray(comparing1 = -1, comparing2 = -1, sortedCount = 0) {
+function displayArray(
+    comparing1 = -1,
+    comparing2 = -1,
+    sortedCount = 0,
+    pivotIndex = -1,
+    minimumIndex = -1,
+    mergeStart = -1,
+    mergeMiddle = -1,
+    mergeEnd = -1,
+    bucketPositions = [],
+    radixCurrent = -1
+) {
     arrayContainer.innerHTML = "";
 
     for (let i = 0; i < array.length; i++) {
@@ -47,11 +60,35 @@ function displayArray(comparing1 = -1, comparing2 = -1, sortedCount = 0) {
 
         bar.style.height = array[i] * 3 + "px";
 
-        if (i >= array.length - sortedCount) {
+        if (bucketPositions[i] !== undefined) {
+            bar.style.transform =
+                `translate(${bucketPositions[i].x}px, ${bucketPositions[i].y}px)`;
+        }
+
+        if (i === radixCurrent) {
+            bar.classList.add("radix-current");
+        } else if (i >= array.length - sortedCount) {
             bar.classList.add("sorted");
+        } else if (i === pivotIndex) {
+            bar.classList.add("pivot");
+        } else if (i === minimumIndex) {
+            bar.classList.add("minimum");
+        } else if (
+            mergeStart !== -1 &&
+            i >= mergeStart &&
+            i <= mergeMiddle
+        ) {
+            bar.classList.add("merge-left");
+        } else if (
+            mergeMiddle !== -1 &&
+            i > mergeMiddle &&
+            i <= mergeEnd
+        ) {
+            bar.classList.add("merge-right");
         } else if (i === comparing1 || i === comparing2) {
             bar.classList.add("comparing");
         }
+        
 
         arrayContainer.appendChild(bar);
     }
@@ -99,19 +136,25 @@ async function bubbleSort() {
 }
 async function selectionSort() {
     for (let i = 0; i < array.length - 1; i++) {
-
         let minimumIndex = i;
 
         for (let j = i + 1; j < array.length; j++) {
+            displayArray(j, -1, i, -1, minimumIndex);
 
-            displayArray(j, minimumIndex, i);
-
-            await new Promise(resolve => setTimeout(resolve, 210 - Number(speedSlider.value)));
+            await new Promise(resolve =>
+                setTimeout(resolve, 210 - Number(speedSlider.value))
+            );
 
             comparisonCount.textContent++;
 
             if (array[j] < array[minimumIndex]) {
                 minimumIndex = j;
+
+                displayArray(j, -1, i, -1, minimumIndex);
+
+                await new Promise(resolve =>
+                    setTimeout(resolve, 210 - Number(speedSlider.value))
+                );
             }
         }
 
@@ -124,23 +167,28 @@ async function selectionSort() {
 
             displayArray(i, minimumIndex, i);
 
-            await new Promise(resolve => setTimeout(resolve, 210 - Number(speedSlider.value)));
+            await new Promise(resolve =>
+                setTimeout(resolve, 210 - Number(speedSlider.value))
+            );
         }
     }
 
     displayArray(-1, -1, array.length);
-
     console.log(array);
 }
 async function insertionSort() {
     for (let i = 1; i < array.length; i++) {
-
         const currentValue = array[i];
         let j = i - 1;
 
-        while (j >= 0 && array[j] > currentValue) {
+        displayArray(-1, -1, 0, -1, i);
 
-            displayArray(j, j + 1, i);
+        await new Promise(resolve =>
+            setTimeout(resolve, 210 - Number(speedSlider.value))
+        );
+
+        while (j >= 0 && array[j] > currentValue) {
+            displayArray(j, -1, 0, -1, i);
 
             await new Promise(resolve =>
                 setTimeout(resolve, 210 - Number(speedSlider.value))
@@ -149,21 +197,24 @@ async function insertionSort() {
             comparisonCount.textContent++;
 
             array[j + 1] = array[j];
-
             j--;
 
             swapCount.textContent++;
 
-            displayArray(j + 1, j + 2, i);
+            displayArray(j + 1, -1, 0, -1, i);
 
             await new Promise(resolve =>
                 setTimeout(resolve, 210 - Number(speedSlider.value))
             );
         }
 
+        if (j >= 0) {
+            comparisonCount.textContent++;
+        }
+
         array[j + 1] = currentValue;
 
-        displayArray(-1, -1, i);
+        displayArray(-1, -1, i + 1);
 
         await new Promise(resolve =>
             setTimeout(resolve, 210 - Number(speedSlider.value))
@@ -171,7 +222,6 @@ async function insertionSort() {
     }
 
     displayArray(-1, -1, array.length);
-
     console.log(array);
 }
 async function mergeSort(start = 0, end = array.length - 1) {
@@ -199,8 +249,16 @@ async function merge(start, middle, end) {
     let arrayIndex = start;
 
     while (leftIndex < left.length && rightIndex < right.length) {
-
-        displayArray(start + leftIndex, middle + 1 + rightIndex);
+        displayArray(
+            start + leftIndex,
+            middle + 1 + rightIndex,
+            0,
+            -1,
+            -1,
+            start,
+            middle,
+            end
+        );
 
         await new Promise(resolve =>
             setTimeout(resolve, 210 - Number(speedSlider.value))
@@ -218,7 +276,16 @@ async function merge(start, middle, end) {
 
         arrayIndex++;
 
-        displayArray(start, end);
+        displayArray(
+            -1,
+            -1,
+            0,
+            -1,
+            -1,
+            start,
+            middle,
+            end
+        );
 
         await new Promise(resolve =>
             setTimeout(resolve, 210 - Number(speedSlider.value))
@@ -227,10 +294,20 @@ async function merge(start, middle, end) {
 
     while (leftIndex < left.length) {
         array[arrayIndex] = left[leftIndex];
+
         leftIndex++;
         arrayIndex++;
 
-        displayArray(start, end);
+        displayArray(
+            -1,
+            -1,
+            0,
+            -1,
+            -1,
+            start,
+            middle,
+            end
+        );
 
         await new Promise(resolve =>
             setTimeout(resolve, 210 - Number(speedSlider.value))
@@ -239,10 +316,20 @@ async function merge(start, middle, end) {
 
     while (rightIndex < right.length) {
         array[arrayIndex] = right[rightIndex];
+
         rightIndex++;
         arrayIndex++;
 
-        displayArray(start, end);
+        displayArray(
+            -1,
+            -1,
+            0,
+            -1,
+            -1,
+            start,
+            middle,
+            end
+        );
 
         await new Promise(resolve =>
             setTimeout(resolve, 210 - Number(speedSlider.value))
@@ -265,12 +352,10 @@ async function quickSort(start = 0, end = array.length - 1) {
 }
 async function partition(start, end) {
     const pivot = array[end];
-
     let smallerIndex = start;
 
     for (let i = start; i < end; i++) {
-
-        displayArray(i, end);
+        displayArray(i, -1, 0, end);
 
         await new Promise(resolve =>
             setTimeout(resolve, 210 - Number(speedSlider.value))
@@ -279,14 +364,13 @@ async function partition(start, end) {
         comparisonCount.textContent++;
 
         if (array[i] < pivot) {
-
             const temporary = array[smallerIndex];
             array[smallerIndex] = array[i];
             array[i] = temporary;
 
             swapCount.textContent++;
 
-            displayArray(smallerIndex, i);
+            displayArray(smallerIndex, i, 0, end);
 
             await new Promise(resolve =>
                 setTimeout(resolve, 210 - Number(speedSlider.value))
@@ -302,7 +386,7 @@ async function partition(start, end) {
 
     swapCount.textContent++;
 
-    displayArray(smallerIndex, end);
+    displayArray(smallerIndex, -1, 0, smallerIndex);
 
     await new Promise(resolve =>
         setTimeout(resolve, 210 - Number(speedSlider.value))
@@ -322,14 +406,17 @@ function createBuckets() {
 
     return buckets;
 }
-function displayBuckets(buckets) {
+function displayBuckets(buckets, activeBucket = -1) {
     const bucketContainer = document.getElementById("bucket-container");
-
     bucketContainer.innerHTML = "";
 
     for (let i = 0; i < buckets.length; i++) {
         const bucket = document.createElement("div");
         bucket.classList.add("bucket");
+
+        if (i === activeBucket) {
+            bucket.classList.add("active");
+        }
 
         const bucketLabel = document.createElement("div");
         bucketLabel.classList.add("bucket-label");
@@ -342,15 +429,46 @@ function displayBuckets(buckets) {
             const number = document.createElement("div");
             number.classList.add("bucket-number");
             number.textContent = buckets[i][j];
-
             bucketNumbers.appendChild(number);
         }
 
         bucket.appendChild(bucketLabel);
         bucket.appendChild(bucketNumbers);
-
         bucketContainer.appendChild(bucket);
     }
+}
+function displayRadixBucketPositions(buckets, activeBucket = -1) {
+    const bucketPositions = {};
+
+    const bucketSpacing = 38;
+    const bucketStartY = 40;
+
+    for (let bucket = 0; bucket < buckets.length; bucket++) {
+        for (let i = 0; i < buckets[bucket].length; i++) {
+            const value = buckets[bucket][i];
+
+            const arrayIndex = array.indexOf(value);
+
+            if (arrayIndex !== -1) {
+                bucketPositions[arrayIndex] = {
+                    x: (bucket - 4.5) * 45,
+                    y: bucketStartY + bucket * bucketSpacing
+                };
+            }
+        }
+    }
+
+    displayArray(
+        -1,
+        -1,
+        0,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        bucketPositions
+    );
 }
 function distributeIntoBuckets(numbers, place) {
     const buckets = createBuckets();
@@ -374,28 +492,112 @@ function collectBuckets(buckets) {
 
     return result;
 }
+async function animateRadixRearrangement(buckets) {
+    const newArray = collectBuckets(buckets);
+
+    const oldArray = [...array];
+
+    for (let i = 0; i < newArray.length; i++) {
+        const currentIndex = oldArray.indexOf(newArray[i]);
+
+        if (currentIndex !== i) {
+            const bars = Array.from(arrayContainer.children);
+
+            const oldPositions = bars.map(bar =>
+                bar.getBoundingClientRect()
+            );
+
+            const temporary = oldArray[i];
+            oldArray[i] = oldArray[currentIndex];
+            oldArray[currentIndex] = temporary;
+
+            array = [...oldArray];
+
+            displayArray();
+
+            const newBars = Array.from(arrayContainer.children);
+
+            newBars.forEach((bar, index) => {
+                const oldPosition = oldPositions[index];
+                const newPosition = bar.getBoundingClientRect();
+
+                const deltaX = oldPosition.left - newPosition.left;
+
+                bar.style.transition = "none";
+                bar.style.transform = `translateX(${deltaX}px)`;
+            });
+
+            arrayContainer.offsetHeight;
+
+            newBars.forEach(bar => {
+                bar.style.transition =
+                    "height 0.12s ease, background-color 0.12s ease, transform 0.35s ease";
+
+                bar.style.transform = "translateX(0)";
+            });
+
+            await new Promise(resolve =>
+                setTimeout(resolve, 210 - Number(speedSlider.value))
+            );
+        }
+    }
+
+    array = newArray;
+    displayArray();
+}
+async function animateRadixScanner(index) {
+    displayArray(
+        -1,
+        -1,
+        0,
+        -1,
+        -1,
+        -1,
+        -1,
+        -1,
+        [],
+        index
+    );
+
+    await new Promise(resolve =>
+        setTimeout(resolve, 210 - Number(speedSlider.value))
+    );
+}
 async function radixSort() {
     const maxValue = Math.max(...array);
     const maxDigits = String(maxValue).length;
 
     for (let place = 0; place < maxDigits; place++) {
+        const buckets = createBuckets();
 
-        const buckets = distributeIntoBuckets(array, place);
+        for (let i = 0; i < array.length; i++) {
+            await animateRadixScanner(i);
+
+            const digit = getDigit(array[i], place);
+
+            buckets[digit].push(array[i]);
+
+            displayBuckets(buckets, digit);
+
+            await new Promise(resolve =>
+                setTimeout(resolve, 210 - Number(speedSlider.value))
+            );
+        }
+
+Array.from(arrayContainer.children).forEach(bar => {
+    bar.classList.remove("radix-current");
+});
 
         displayBuckets(buckets);
-        
-        await new Promise(resolve =>
-            setTimeout(resolve, 210 - Number(speedSlider.value))
-        );
-        
-        array = collectBuckets(buckets);    
-
-        displayArray();
 
         await new Promise(resolve =>
-            setTimeout(resolve, 210 - Number(speedSlider.value))
-        );
+            setTimeout(resolve, 210 - Number(speedSlider.value)
+        ));
+
+        await animateRadixRearrangement(buckets);
     }
+
+    displayBuckets([]);
 
     displayArray(-1, -1, array.length);
 
@@ -407,13 +609,27 @@ function showSortedMessage() {
 }
 function setSortingState(isSorting) {
     sortButton.disabled = isSorting;
+    generateButton.disabled = isSorting;
+    algorithmSelect.disabled = isSorting;
+    sizeSlider.disabled = isSorting;
+    speedSlider.disabled = isSorting;
 }
 sortButton.addEventListener("click", async () => {
+
     if (sortButton.disabled) {
         return;
     }
 
-    sortButton.disabled = true;
+    setSortingState(true);
+
+    const startTime = performance.now();
+
+    const timer = setInterval(() => {
+        const currentTime = performance.now();
+        const elapsedTime = (currentTime - startTime) / 1000;
+
+        timeCount.textContent = elapsedTime.toFixed(2) + "s";
+    }, 10);
 
     if (algorithmSelect.value === "bubble") {
         await bubbleSort();
@@ -429,8 +645,16 @@ sortButton.addEventListener("click", async () => {
         await radixSort();
     }
 
-    sortButton.disabled = false;
+    clearInterval(timer);
+
+    const endTime = performance.now();
+    const elapsedTime = (endTime - startTime) / 1000;
+
+    timeCount.textContent = elapsedTime.toFixed(2) + "s";
+
+    setSortingState(false);
     showSortedMessage();
+
 });
 sizeSlider.addEventListener("input", () => {
     sizeValue.textContent = sizeSlider.value;
@@ -440,8 +664,8 @@ speedSlider.addEventListener("input", () => {
     const delay = 210 - Number(speedSlider.value);
     speedValue.textContent = delay;
 });
-generateButton.addEventListener("click", generateArray);
-generateArray();
+    generateButton.addEventListener("click", generateArray);
+    generateArray();
 const algorithmTitle = document.getElementById("algorithm-title");
 const algorithmDescription = document.getElementById("algorithm-description");
 const bestComplexity = document.getElementById("best-complexity");

@@ -17,11 +17,15 @@ body {
     justify-content: center;
     gap: 4px;
     margin-top: 30px;
+    position: relative;
 }
 
 #array-container div {
     width: 15px;
-    background-color: blue;
+    background-color: rgb(103, 103, 160);
+    border-radius: 6px 6px 0 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: height 0.12s ease, background-color 0.12s ease;
 }
 #array-container div.comparing {
     background-color: red;
@@ -201,7 +205,19 @@ input[type="range"] {
     transform: translateY(-5px);
     box-shadow: 0 0 12px rgba(248, 113, 113, 0.7);
 }
+#array-container div.pivot {
+    background-color: gold;
+}
+#array-container div.minimum {
+    background-color: orange;
+}
+#array-container div.merge-left {
+    background-color: purple;
+}
 
+#array-container div.merge-right {
+    background-color: cyan;
+}
 #array-container div.sorted {
     box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
 }
@@ -215,6 +231,10 @@ input[type="range"] {
 }
 .bucket {
     animation: bucketAppear 0.25s ease;
+}
+.bucket.active {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
 .bucket-number {
@@ -309,6 +329,12 @@ input[type="range"] {
 
     #array-container div {
         width: 8px;
+    }
+    #array-container div {
+        transition:
+            height 0.12s ease,
+            background-color 0.12s ease,
+            transform 0.35s ease;
     }
 
     #bucket-container {
@@ -405,4 +431,36 @@ input[type="range"] {
 #status-message.show {
     opacity: 1;
     transform: translateY(0);
+}
+button:disabled,
+select:disabled,
+input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+#array-container div.radix-current {
+    background-color: #ff4d6d;
+    box-shadow: 0 0 12px rgba(255, 77, 109, 0.65);
+}
+#array-container div.radix-current {
+    background-color: #ff4d6d;
+    box-shadow: 0 0 12px rgba(255, 77, 109, 0.65);
+    animation: radixPulse 0.25s ease-out;
+}
+
+@keyframes radixPulse {
+    0% {
+        transform: scaleY(1);
+        box-shadow: 0 0 4px rgba(255, 77, 109, 0.3);
+    }
+
+    50% {
+        transform: scaleY(1.06);
+        box-shadow: 0 0 16px rgba(255, 77, 109, 0.9);
+    }
+
+    100% {
+        transform: scaleY(1);
+        box-shadow: 0 0 12px rgba(255, 77, 109, 0.65);
+    }
 }
